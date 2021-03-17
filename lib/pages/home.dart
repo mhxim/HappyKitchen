@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:happy_kitchen/pages/subpages/storage.dart';
+import 'package:happy_kitchen/widgets/home_main_button.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.username}) : super(key: key);
@@ -19,27 +23,13 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Home",
-                      textAlign: TextAlign.right,
-                    ),
+                    Text("Home"),
                     new Text("Welcome Back,"),
                     new Text(widget.username),
-                    Wrap(
-                      children: [
-                        Stack(children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0))),
-                            width:
-                                (MediaQuery.of(context).size.width - 100.0) / 2,
-                            height: 250.0,
-                          ),
-                          Text("Storage")
-                        ])
-                      ],
+                    Expanded(
+                      child: Wrap(
+                        children: [HomeMainButton(page: StoragePage())],
+                      ),
                     )
                   ],
                 ))));

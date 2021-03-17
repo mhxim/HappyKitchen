@@ -2,13 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
-import 'package:happy_kitchen/pages/home.dart';
+import 'package:happy_kitchen/utils/ui/tabs.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
     DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
+    DeviceOrientation.portraitDown,
   ]).then((_) => runApp(HappyKitchen()));
 }
 
@@ -29,9 +29,9 @@ class HappyKitchen extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          textTheme: AppTheme.textTheme,
+          // textTheme: AppTheme.textTheme,
           platform: TargetPlatform.android,
         ),
-        home: HomePage(username: "Maxim"));
+        home: TabsPage());
   }
 }
