@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class ProductView extends StatefulWidget {
   ProductView({Key key, this.id, this.lastPage}) : super(key: key);
@@ -24,7 +25,10 @@ class _ProductViewState extends State<ProductView> {
                         child: Text(widget.lastPage),
                         onTap: () => Navigator.pop(context),
                       ),
-                      Text("Product"),
+                      Padding(
+                        padding: AppTheme.pageTitleMargin,
+                        child: Text("Product", style: AppTheme.pageTitle),
+                      ),
                       Expanded(
                         child: ListView(
                           scrollDirection: Axis.vertical,

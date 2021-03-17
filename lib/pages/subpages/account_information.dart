@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class AccountInformation extends StatefulWidget {
   @override
@@ -20,7 +21,11 @@ class _AccountInformationState extends State<AccountInformation> {
                         child: Text("APP SETTINGS"),
                         onTap: () => Navigator.pop(context),
                       ),
-                      Text("Account Information"),
+                      Padding(
+                        padding: AppTheme.pageTitleMargin,
+                        child: Text("Account Informaion",
+                            style: AppTheme.pageTitle),
+                      ),
                       Expanded(
                         child: ListView(
                           scrollDirection: Axis.vertical,

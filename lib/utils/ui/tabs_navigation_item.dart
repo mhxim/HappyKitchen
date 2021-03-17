@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class TabNavigationItem {
   final int page;
   final Widget title;
-  final Icon icon;
+  final Widget icon;
 
   TabNavigationItem({
     @required this.page,
@@ -15,13 +17,21 @@ class TabNavigationItem {
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
           page: 0,
-          icon: Icon(Icons.home),
-          title: Text("Home"),
+          icon: SvgPicture.asset(
+            "assets/images/Home_fill.svg",
+            height: 35,
+            width: 35,
+          ),
+          title: Text("home", style: AppTheme.navTitle),
         ),
         TabNavigationItem(
           page: 1,
-          icon: Icon(Icons.person),
-          title: Text("Profile"),
+          icon: Padding(
+            padding: EdgeInsets.only(top: 5, bottom: 5),
+            child: SvgPicture.asset("assets/images/User_Outline.svg",
+                height: 25, width: 25, color: Colors.grey),
+          ),
+          title: Text("profile", style: AppTheme.navTitle),
         ),
       ];
 }

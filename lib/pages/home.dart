@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/storage.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 import 'package:happy_kitchen/widgets/home_main_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,12 +24,46 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Home"),
-                    new Text("Welcome Back,"),
-                    new Text(widget.username),
+                    Padding(
+                      padding: AppTheme.pageTitleMargin,
+                      child: Text("Home", style: AppTheme.pageTitle),
+                    ),
+                    Padding(
+                      padding: AppTheme.defaultMargin,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Welcome Back,", style: AppTheme.subTitle),
+                          Text(
+                            widget.username,
+                            style: AppTheme.homeUsername,
+                          ),
+                        ],
+                      ),
+                    ),
                     Expanded(
                       child: Wrap(
-                        children: [HomeMainButton(page: StoragePage())],
+                        spacing: 10.0,
+                        direction: Axis.horizontal,
+                        alignment: WrapAlignment.spaceBetween,
+                        children: [
+                          HomeMainButton(
+                              page: StoragePage(),
+                              imageUrl: "assets/images/logo.png",
+                              title: "Storage"),
+                          HomeMainButton(
+                              page: StoragePage(),
+                              imageUrl: "assets/images/logo.png",
+                              title: "Meals"),
+                          HomeMainButton(
+                              page: StoragePage(),
+                              imageUrl: "assets/images/logo.png",
+                              title: "Recepies"),
+                          HomeMainButton(
+                              page: StoragePage(),
+                              imageUrl: "assets/images/logo.png",
+                              title: "Order"),
+                        ],
                       ),
                     )
                   ],

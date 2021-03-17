@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/settings.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key, this.username}) : super(key: key);
@@ -22,7 +23,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Row(
                       children: [
-                        Text("Profile"),
+                        Padding(
+                          padding: AppTheme.pageTitleMargin,
+                          child: Text("Profile", style: AppTheme.pageTitle),
+                        ),
                         GestureDetector(
                           onTap: () => Navigator.push(
                             context,

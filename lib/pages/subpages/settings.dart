@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/data_protection.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 import 'account_information.dart';
 
@@ -18,7 +19,10 @@ class AppSettings extends StatelessWidget {
                         child: Text("PROFILE"),
                         onTap: () => Navigator.pop(context),
                       ),
-                      Text("App Settings"),
+                      Padding(
+                        padding: AppTheme.pageTitleMargin,
+                        child: Text("App Settings", style: AppTheme.pageTitle),
+                      ),
                       Expanded(
                         child: ListView(
                           scrollDirection: Axis.vertical,

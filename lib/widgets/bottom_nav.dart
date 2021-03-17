@@ -21,16 +21,12 @@ class _CustomNavBarState extends State<CustomNavBar> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 for (final tabItem in TabNavigationItem.items)
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                          icon: tabItem.icon,
-                          onPressed: () {
-                            widget.controller.jumpToPage(tabItem.page);
-                          }),
-                      tabItem.title
-                    ],
+                  GestureDetector(
+                    onTap: () => widget.controller.jumpToPage(tabItem.page),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [tabItem.icon, tabItem.title],
+                    ),
                   )
               ],
             )));

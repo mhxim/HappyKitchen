@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:happy_kitchen/pages/subpages/storage_cell.dart';
+import 'package:happy_kitchen/widgets/storage_box.dart';
+import 'package:happy_kitchen/widgets/stat_box.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class StoragePage extends StatefulWidget {
   @override
@@ -13,15 +15,21 @@ class _StoragePageState extends State<StoragePage> {
         body: SafeArea(
             child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(left: 40.0, right: 40.0, top: 20.0),
+                padding: EdgeInsets.only(left: 40.0, top: 15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      child: Text("HOME"),
-                      onTap: () => Navigator.pop(context),
+                    Padding(
+                      padding: AppTheme.routeMargin,
+                      child: GestureDetector(
+                        child: Text("HOME", style: AppTheme.routeText),
+                        onTap: () => Navigator.pop(context),
+                      ),
                     ),
-                    Text("Storage"),
+                    Padding(
+                      padding: AppTheme.pageTitleMargin,
+                      child: Text("Storage", style: AppTheme.pageTitle),
+                    ),
                     Expanded(
                       child: ListView(
                         scrollDirection: Axis.vertical,
@@ -29,19 +37,27 @@ class _StoragePageState extends State<StoragePage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Statistics"),
-                              Container(
-                                height: 65.0,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
+                              Padding(
+                                padding: AppTheme.defaultMargin,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Padding(
+                                      padding: AppTheme.defaultMargin,
+                                      child: Text("Statistics",
+                                          style: AppTheme.subTitle),
+                                    ),
                                     Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      height: 75.0,
+                                      child: ListView(
+                                        scrollDirection: Axis.horizontal,
                                         children: [
-                                          Text("Storage Units"),
-                                          Text("4 registered")
+                                          StatBox(
+                                              title: "Storage Units",
+                                              text: "4 registered"),
+                                          StatBox(
+                                              title: "Storage Units",
+                                              text: "4 registered")
                                         ],
                                       ),
                                     )
@@ -54,28 +70,27 @@ class _StoragePageState extends State<StoragePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Units"),
+                                Padding(
+                                  padding: AppTheme.defaultMargin,
+                                  child:
+                                      Text("Units", style: AppTheme.subTitle),
+                                ),
                                 Container(
-                                  child: Wrap(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () => Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                StorageCell(id: "yes"),
-                                          ),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            // Image(image: null),
-                                            Text("Fridge 1")
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                  decoration: AppTheme.defaultBox,
+                                  width:
+                                      MediaQuery.of(context).size.width - 80.0,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10.0),
+                                    child: Wrap(
+                                      children: [
+                                        StorageBox(
+                                            title: "Fridge 1", id: "abc"),
+                                        StorageBox(
+                                            title: "Fridge 1", id: "abc"),
+                                      ],
+                                    ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           )

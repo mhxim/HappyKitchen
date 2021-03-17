@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class DataProtection extends StatelessWidget {
   @override
@@ -15,7 +16,11 @@ class DataProtection extends StatelessWidget {
                         child: Text("APP SETTINGS"),
                         onTap: () => Navigator.pop(context),
                       ),
-                      Text("Data Protection"),
+                      Padding(
+                        padding: AppTheme.pageTitleMargin,
+                        child:
+                            Text("Data Protection", style: AppTheme.pageTitle),
+                      ),
                       Expanded(
                         child: ListView(
                           scrollDirection: Axis.vertical,
