@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: AppTheme.pageTitleMargin,
                           child: Text("Profile", style: AppTheme.pageTitle),
                         ),
+                        Spacer(),
                         GestureDetector(
                           onTap: () => Navigator.push(
                             context,
@@ -34,34 +36,64 @@ class _ProfilePageState extends State<ProfilePage> {
                               builder: (BuildContext context) => AppSettings(),
                             ),
                           ),
-                          child: Icon(Icons.settings),
+                          child: Icon(
+                            Icons.settings,
+                            size: 30,
+                          ),
                         )
                       ],
                     ),
                     Expanded(
                       child: ListView(
                         children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 65.0,
-                                height: 65.0,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey, shape: BoxShape.circle),
-                              ),
-                              Text("Maxim")
-                            ],
+                          Padding(
+                            padding: AppTheme.defaultMargin,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 65.0,
+                                  height: 65.0,
+                                  decoration: BoxDecoration(
+                                      color: AppTheme.defaultSubColor,
+                                      shape: BoxShape.circle),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: Text("Maxim",
+                                      style: AppTheme.homeUsername),
+                                )
+                              ],
+                            ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Alerts"),
+                              Padding(
+                                padding: AppTheme.defaultMargin,
+                                child: Text("Alerts", style: AppTheme.subTitle),
+                              ),
                               Container(
-                                child: Row(
-                                  children: [
-                                    Text("Expiry Alerts"),
-                                    Icon(Icons.alarm)
-                                  ],
+                                decoration: AppTheme.defaultBox,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 5),
+                                  child: Row(
+                                    children: [
+                                      Text("Expiry Alerts",
+                                          style: AppTheme.statisticsText),
+                                      Icon(Icons.add_alert),
+                                      Spacer(),
+                                      Switch(
+                                        value: isSwitched,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            isSwitched = value;
+                                            print(isSwitched);
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               )
                             ],

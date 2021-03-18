@@ -47,7 +47,7 @@ class _ScanButtonState extends State<ScanButton> {
               BoxDecoration(color: Color(0xff6C63FF), shape: BoxShape.circle),
           child: Center(
             child: SvgPicture.asset("assets/images/qr-code.svg",
-                height: 50, width: 50),
+                height: 45, width: 45),
           ),
         ),
       ),

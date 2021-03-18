@@ -12,9 +12,13 @@ class DataProtection extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        child: Text("APP SETTINGS"),
-                        onTap: () => Navigator.pop(context),
+                      Padding(
+                        padding: AppTheme.routeMargin,
+                        child: GestureDetector(
+                          child:
+                              Text("APP SETTINGS", style: AppTheme.routeText),
+                          onTap: () => Navigator.pop(context),
+                        ),
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
@@ -24,7 +28,10 @@ class DataProtection extends StatelessWidget {
                       Expanded(
                         child: ListView(
                           scrollDirection: Axis.vertical,
-                          children: [Text("We don't sell your data.")],
+                          children: [
+                            Text("We don't sell your data.",
+                                style: AppTheme.settingsText)
+                          ],
                         ),
                       ),
                     ]))));

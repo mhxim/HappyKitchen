@@ -28,7 +28,7 @@ class HappyKitchen extends StatelessWidget {
         title: 'Happy Kitchen',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.grey,
           // textTheme: AppTheme.textTheme,
           platform: TargetPlatform.android,
         ),

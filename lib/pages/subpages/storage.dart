@@ -57,7 +57,7 @@ class _StoragePageState extends State<StoragePage> {
                                               text: "4 registered"),
                                           StatBox(
                                               title: "Storage Units",
-                                              text: "4 registered")
+                                              text: "4 registered"),
                                         ],
                                       ),
                                     )
@@ -83,6 +83,8 @@ class _StoragePageState extends State<StoragePage> {
                                     padding: EdgeInsets.all(10.0),
                                     child: Wrap(
                                       children: [
+                                        StorageBox(
+                                            title: "Fridge 1", id: "abc"),
                                         StorageBox(
                                             title: "Fridge 1", id: "abc"),
                                         StorageBox(

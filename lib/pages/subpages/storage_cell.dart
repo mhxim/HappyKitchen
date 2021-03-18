@@ -70,15 +70,15 @@ class _StorageCellState extends State<StorageCell> {
                                 children: [
                                   Padding(
                                     padding: AppTheme.defaultMargin,
-                                    child:
-                                        Text("Units", style: AppTheme.subTitle),
+                                    child: Text("Products",
+                                        style: AppTheme.subTitle),
                                   ),
                                   Container(
                                     decoration: AppTheme.defaultBox,
                                     width: MediaQuery.of(context).size.width -
                                         80.0,
                                     child: Padding(
-                                        padding: EdgeInsets.all(10.0),
+                                        padding: EdgeInsets.all(15.0),
                                         child: DataTable(
                                           columns: const <DataColumn>[
                                             DataColumn(

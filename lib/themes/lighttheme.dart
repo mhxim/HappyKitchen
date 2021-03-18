@@ -35,4 +35,7 @@ class AppTheme {
       color: Colors.black, fontWeight: FontWeight.w800, fontSize: 12.5);
   static const tableText = TextStyle(
       color: Colors.black, fontWeight: FontWeight.w500, fontSize: 12.5);
+  static const settingsText =
+      TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20);
+  static const defaultSubColor = Color(0xffEFEFEF);
 }

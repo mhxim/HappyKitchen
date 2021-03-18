@@ -17,13 +17,17 @@ class _AccountInformationState extends State<AccountInformation> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        child: Text("APP SETTINGS"),
-                        onTap: () => Navigator.pop(context),
+                      Padding(
+                        padding: AppTheme.routeMargin,
+                        child: GestureDetector(
+                          child:
+                              Text("APP SETTINGS", style: AppTheme.routeText),
+                          onTap: () => Navigator.pop(context),
+                        ),
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
-                        child: Text("Account Informaion",
+                        child: Text("Account Information",
                             style: AppTheme.pageTitle),
                       ),
                       Expanded(

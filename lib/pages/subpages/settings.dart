@@ -15,9 +15,12 @@ class AppSettings extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        child: Text("PROFILE"),
-                        onTap: () => Navigator.pop(context),
+                      Padding(
+                        padding: AppTheme.routeMargin,
+                        child: GestureDetector(
+                          child: Text("PROFILE", style: AppTheme.routeText),
+                          onTap: () => Navigator.pop(context),
+                        ),
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
@@ -36,14 +39,20 @@ class AppSettings extends StatelessWidget {
                                 ),
                               ),
                               child: Container(
-                                child: Row(
-                                  children: [
-                                    Text("Account Information"),
-                                    Icon(Icons.arrow_right)
-                                  ],
+                                decoration: AppTheme.defaultBox,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Text("Account Information",
+                                          style: AppTheme.settingsText),
+                                      Icon(Icons.arrow_right)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
+                            SizedBox(height: 15),
                             GestureDetector(
                               onTap: () => Navigator.push(
                                 context,
@@ -53,11 +62,33 @@ class AppSettings extends StatelessWidget {
                                 ),
                               ),
                               child: Container(
-                                child: Row(
-                                  children: [
-                                    Text("Data Protection"),
-                                    Icon(Icons.arrow_right)
-                                  ],
+                                decoration: AppTheme.defaultBox,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Text("Data Protection",
+                                          style: AppTheme.settingsText),
+                                      Icon(Icons.arrow_right)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            GestureDetector(
+                              onTap: () => {},
+                              child: Container(
+                                decoration: AppTheme.defaultBox,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Text("Logout",
+                                          style: AppTheme.settingsText),
+                                      Icon(Icons.arrow_right)
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
