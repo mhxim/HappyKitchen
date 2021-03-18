@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/settings.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key key, this.username}) : super(key: key);
-  final String username;
+  ProfilePage({Key key, this.user}) : super(key: key);
+  final User user;
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -33,7 +34,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (BuildContext context) => AppSettings(),
+                              builder: (BuildContext context) =>
+                                  AppSettings(user: widget.user),
                             ),
                           ),
                           child: Icon(
@@ -54,12 +56,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 65.0,
                                   height: 65.0,
                                   decoration: BoxDecoration(
-                                      color: AppTheme.defaultSubColor,
-                                      shape: BoxShape.circle),
+                                    color: AppTheme.defaultSubColor,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        image:
+                                            NetworkImage(widget.user.photoURL),
+                                        fit: BoxFit.fill),
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(left: 15),
-                                  child: Text("Maxim",
+                                  child: Text(widget.user.displayName,
                                       style: AppTheme.homeUsername),
                                 )
                               ],

@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class AccountInformation extends StatefulWidget {
+  AccountInformation({Key key, this.user}) : super(key: key);
+  final User user;
+
   @override
   _AccountInformationState createState() => _AccountInformationState();
 }
@@ -34,16 +38,42 @@ class _AccountInformationState extends State<AccountInformation> {
                         child: ListView(
                           scrollDirection: Axis.vertical,
                           children: [
-                            TextFormField(
-                              decoration: InputDecoration(labelText: "Name"),
+                            Container(
+                              decoration: AppTheme.defaultBox,
+                              child: Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Name",
+                                        style: AppTheme.statisticsTitle),
+                                    Text(widget.user.displayName,
+                                        style: AppTheme.statisticsText),
+                                  ],
+                                ),
+                              ),
                             ),
-                            TextFormField(
-                              decoration: InputDecoration(labelText: "Email"),
+                            SizedBox(height: 10),
+                            Container(
+                              decoration: AppTheme.defaultBox,
+                              child: Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Email",
+                                        style: AppTheme.statisticsTitle),
+                                    Text(widget.user.email,
+                                        style: AppTheme.statisticsText),
+                                  ],
+                                ),
+                              ),
                             ),
-                            TextFormField(
-                              decoration:
-                                  InputDecoration(labelText: "New Password"),
-                            )
+
+                            // TextFormField(
+                            //   decoration:
+                            //       InputDecoration(labelText: "New Password"),
+                            // )
                           ],
                         ),
                       ),

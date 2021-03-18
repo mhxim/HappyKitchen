@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 import 'package:happy_kitchen/utils/ui/tabs.dart';
 
+import 'core/auth/initial/initial.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
@@ -32,6 +34,6 @@ class HappyKitchen extends StatelessWidget {
           // textTheme: AppTheme.textTheme,
           platform: TargetPlatform.android,
         ),
-        home: TabsPage());
+        home: InitialPage());
   }
 }

@@ -1,13 +1,14 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/storage.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 import 'package:happy_kitchen/widgets/home_main_button.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.username}) : super(key: key);
-  final String username;
+  HomePage({Key key, this.user}) : super(key: key);
+  final User user;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Text("Welcome Back,", style: AppTheme.subTitle),
                           Text(
-                            widget.username,
+                            widget.user.displayName,
                             style: AppTheme.homeUsername,
                           ),
                         ],

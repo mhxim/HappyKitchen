@@ -38,4 +38,5 @@ class AppTheme {
   static const settingsText =
       TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20);
   static const defaultSubColor = Color(0xffEFEFEF);
+  static const highlightColor = Color(0xff6C63FF);
 }
