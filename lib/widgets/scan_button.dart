@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:happy_kitchen/pages/subpages/product_view.dart';
+import 'package:happy_kitchen/utils/services/product_service.dart';
 
 class ScanButton extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class ScanButton extends StatefulWidget {
 
 class _ScanButtonState extends State<ScanButton> {
   String _scanBarcode = 'Unknown';
+  String _productName;
 
   Future<void> scanBarcodeNormal() async {
     String barcodeScanRes;
@@ -33,15 +35,17 @@ class _ScanButtonState extends State<ScanButton> {
       height: 65.0,
       width: 65.0,
       child: GestureDetector(
-        onTap: () => scanBarcodeNormal().then(
-          (value) => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  ProductView(id: "yees 2", lastPage: "BACK"),
-            ),
-          ),
-        ),
+        onTap: () => scanBarcodeNormal().then((value) => {
+              Barcode.getBarcodeInfo(_scanBarcode)
+                  .then((value) => {_productName = value.productName}),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      ProductView(productName: _productName, lastPage: "BACK"),
+                ),
+              ),
+            }),
         child: Container(
           decoration:
               BoxDecoration(color: Color(0xff6C63FF), shape: BoxShape.circle),

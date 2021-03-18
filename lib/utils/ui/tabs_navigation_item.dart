@@ -17,11 +17,8 @@ class TabNavigationItem {
   static List<TabNavigationItem> get items => [
         TabNavigationItem(
           page: 0,
-          icon: SvgPicture.asset(
-            "assets/images/Home_fill.svg",
-            height: 35,
-            width: 35,
-          ),
+          icon: SvgPicture.asset("assets/images/Home_fill.svg",
+              height: 35, width: 35, color: Colors.white),
           title: Text("home", style: AppTheme.navTitle),
         ),
         TabNavigationItem(
@@ -29,7 +26,7 @@ class TabNavigationItem {
           icon: Padding(
             padding: EdgeInsets.only(top: 5, bottom: 5),
             child: SvgPicture.asset("assets/images/User_Outline.svg",
-                height: 25, width: 25, color: Colors.grey),
+                height: 25, width: 25, color: Colors.white),
           ),
           title: Text("profile", style: AppTheme.navTitle),
         ),

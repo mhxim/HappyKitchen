@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/product_view.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
@@ -5,8 +6,8 @@ import 'package:happy_kitchen/widgets/stat_box.dart';
 import 'package:happy_kitchen/utils/services/products_service.dart';
 
 class StorageCell extends StatefulWidget {
-  StorageCell({Key key, this.id}) : super(key: key);
-  final String id;
+  StorageCell({Key key, this.document}) : super(key: key);
+  final DocumentSnapshot document;
   @override
   _StorageCellState createState() => _StorageCellState();
 }
@@ -31,7 +32,8 @@ class _StorageCellState extends State<StorageCell> {
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
-                        child: Text("Fridge 1", style: AppTheme.pageTitle),
+                        child: Text(widget.document["name"],
+                            style: AppTheme.pageTitle),
                       ),
                       Expanded(
                         child: ListView(
@@ -83,31 +85,32 @@ class _StorageCellState extends State<StorageCell> {
                                           columns: const <DataColumn>[
                                             DataColumn(
                                               label: Text(
-                                                'Quantity',
-                                                style: AppTheme.tableTitle,
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Text(
                                                 'Product',
                                                 style: AppTheme.tableTitle,
                                               ),
                                             ),
                                             DataColumn(
                                               label: Text(
-                                                'Actions',
+                                                'Expiry',
+                                                style: AppTheme.tableTitle,
+                                              ),
+                                            ),
+                                            DataColumn(
+                                              label: Text(
+                                                'View Ingridients',
                                                 style: AppTheme.tableTitle,
                                               ),
                                             ),
                                           ],
                                           rows: <DataRow>[
-                                            for (var product
-                                                in ScannedProduct.items)
+                                            for (var item
+                                                in widget.document["items"])
                                               DataRow(
                                                 cells: <DataCell>[
-                                                  DataCell(Text(product.quantity
-                                                      .toString())),
-                                                  DataCell(Text(product.title,
+                                                  DataCell(Text(item["name"],
+                                                      style:
+                                                          AppTheme.tableText)),
+                                                  DataCell(Text(item["expiry"],
                                                       style:
                                                           AppTheme.tableText)),
                                                   DataCell(
@@ -118,14 +121,15 @@ class _StorageCellState extends State<StorageCell> {
                                                                   context,
                                                                   MaterialPageRoute(
                                                                     builder: (BuildContext context) => ProductView(
-                                                                        id: product
-                                                                            .id,
+                                                                        productName:
+                                                                            item[
+                                                                                "name"],
                                                                         lastPage:
-                                                                            "Fridge 1"),
+                                                                            widget.document["item"]),
                                                                   ),
                                                                 ),
-                                                        child: Icon(
-                                                            Icons.view_agenda)),
+                                                        child: Icon(Icons
+                                                            .panorama_fish_eye)),
                                                   ),
                                                 ],
                                               )

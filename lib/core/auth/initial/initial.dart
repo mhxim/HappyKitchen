@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:happy_kitchen/core/auth/login/login_with_mail.dart';
-import 'package:happy_kitchen/core/auth/register/register_with_mail.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 import 'package:happy_kitchen/utils/services/authentication.dart';
-import 'package:happy_kitchen/utils/ui/tabs.dart';
 import 'package:happy_kitchen/widgets/big_button.dart';
 import 'package:happy_kitchen/widgets/google_sign_in_button.dart';
 

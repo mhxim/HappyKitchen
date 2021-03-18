@@ -1,16 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
+import 'package:happy_kitchen/utils/services/product_service.dart';
 
 class ProductView extends StatefulWidget {
-  ProductView({Key key, this.id, this.lastPage}) : super(key: key);
-  final String id;
+  ProductView({Key key, this.productName, this.lastPage}) : super(key: key);
+  final String productName;
   final String lastPage;
   @override
   _ProductViewState createState() => _ProductViewState();
 }
 
 class _ProductViewState extends State<ProductView> {
+  ProductIngredients productIngredients;
+
+  @override
+  void initState() {
+    super.initState();
+    ScannedProduct.getProductIngredients(widget.productName)
+        .then((value) => {productIngredients = value});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +43,21 @@ class _ProductViewState extends State<ProductView> {
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
-                        child: Text("Product", style: AppTheme.pageTitle),
+                        child: Row(
+                          children: [
+                            Text("Product", style: AppTheme.pageTitle),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () => {},
+                              child: Row(
+                                children: [
+                                  Text("Add Product"),
+                                  Icon(Icons.plus_one)
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: ListView(
@@ -41,10 +67,7 @@ class _ProductViewState extends State<ProductView> {
                               padding: AppTheme.defaultMargin,
                               child: CarouselSlider(
                                 items: [
-                                  Image.network(
-                                      'https://picsum.photos/250?image=9'),
-                                  Image.network(
-                                      'https://picsum.photos/250?image=2')
+                                  Image.network(productIngredients.photoUrl),
                                 ],
                                 options: CarouselOptions(
                                   height: 275.0,
@@ -64,58 +87,8 @@ class _ProductViewState extends State<ProductView> {
                             ),
                             Padding(
                               padding: AppTheme.defaultMargin,
-                              child: Container(
-                                decoration: AppTheme.defaultBox,
-                                child: Padding(
-                                  padding: EdgeInsets.all(15),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: AppTheme.defaultMargin,
-                                        child: Text("Egg",
-                                            style: AppTheme.subTitle),
-                                      ),
-                                      Wrap(
-                                        spacing: 10,
-                                        children: [
-                                          Padding(
-                                            padding: AppTheme.defaultMargin,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Company",
-                                                    style: AppTheme
-                                                        .statisticsTitle),
-                                                Text("EggCompany 5000",
-                                                    style: AppTheme
-                                                        .statisticsText),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: AppTheme.defaultMargin,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text("Expiry",
-                                                    style: AppTheme
-                                                        .statisticsTitle),
-                                                Text("10.12.2021",
-                                                    style: AppTheme
-                                                        .statisticsText),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              child: Text(productIngredients.foodName,
+                                  style: AppTheme.subTitle),
                             ),
                             Padding(
                               padding: AppTheme.defaultMargin,
@@ -145,7 +118,169 @@ class _ProductViewState extends State<ProductView> {
                                                       style: AppTheme
                                                           .statisticsTitle),
                                                   Spacer(),
-                                                  Text("72",
+                                                  Text(
+                                                      productIngredients
+                                                          .calories
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Total Fat",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .totalFat
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Saturated Fat",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .saturatedFat
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Cholesterol",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .cholesterol
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Sodium",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients.sodium
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Total Carbohydrate",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .totalCarbohydrate
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Dietary Fiber",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .dietaryFiber
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Sugars",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients.sugars
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Protein",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients.protein
+                                                          .toString(),
+                                                      style: AppTheme
+                                                          .statisticsText)
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 2.5),
+                                              child: Row(
+                                                children: [
+                                                  Text("Potassium",
+                                                      style: AppTheme
+                                                          .statisticsTitle),
+                                                  Spacer(),
+                                                  Text(
+                                                      productIngredients
+                                                          .calories
+                                                          .toString(),
                                                       style: AppTheme
                                                           .statisticsText)
                                                 ],

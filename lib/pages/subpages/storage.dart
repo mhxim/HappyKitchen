@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:happy_kitchen/utils/services/storage_service.dart';
 import 'package:happy_kitchen/widgets/storage_box.dart';
 import 'package:happy_kitchen/widgets/stat_box.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
@@ -9,6 +11,14 @@ class StoragePage extends StatefulWidget {
 }
 
 class _StoragePageState extends State<StoragePage> {
+  DocumentSnapshot storageUnits;
+
+  @override
+  void initState() {
+    super.initState();
+    Storage.getStorageUnits().then((value) => storageUnits = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +65,6 @@ class _StoragePageState extends State<StoragePage> {
                                           StatBox(
                                               title: "Storage Units",
                                               text: "4 registered"),
-                                          StatBox(
-                                              title: "Storage Units",
-                                              text: "4 registered"),
                                         ],
                                       ),
                                     )
@@ -80,18 +87,32 @@ class _StoragePageState extends State<StoragePage> {
                                   width:
                                       MediaQuery.of(context).size.width - 80.0,
                                   child: Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Wrap(
-                                      children: [
-                                        StorageBox(
-                                            title: "Fridge 1", id: "abc"),
-                                        StorageBox(
-                                            title: "Fridge 1", id: "abc"),
-                                        StorageBox(
-                                            title: "Fridge 1", id: "abc"),
-                                      ],
-                                    ),
-                                  ),
+                                      padding: EdgeInsets.all(10.0),
+                                      child: StreamBuilder<QuerySnapshot>(
+                                          stream: FirebaseFirestore.instance
+                                              .collection('books')
+                                              .snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<QuerySnapshot>
+                                                  snapshot) {
+                                            if (snapshot.hasError)
+                                              return new Text(
+                                                  'Error: ${snapshot.error}');
+                                            switch (snapshot.connectionState) {
+                                              case ConnectionState.waiting:
+                                                return new Text('Loading...');
+                                              default:
+                                                return new Wrap(
+                                                  children: snapshot.data.docs
+                                                      .map((DocumentSnapshot
+                                                          document) {
+                                                    return new StorageBox(
+                                                        title: document["name"],
+                                                        document: document);
+                                                  }).toList(),
+                                                );
+                                            }
+                                          })),
                                 ),
                               ],
                             ),

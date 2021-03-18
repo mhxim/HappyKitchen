@@ -50,6 +50,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   collection:
     dependency: transitive
     description:
@@ -177,6 +198,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.0"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.0"
   http_parser:
     dependency: transitive
     description:
@@ -233,6 +261,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.4"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.11.0"
   petitparser:
     dependency: transitive
     description:
