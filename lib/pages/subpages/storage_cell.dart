@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:happy_kitchen/pages/subpages/product_view.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 import 'package:happy_kitchen/widgets/stat_box.dart';
-import 'package:happy_kitchen/utils/services/products_service.dart';
+import 'package:happy_kitchen/utils/services/example_products.dart';
 
 class StorageCell extends StatefulWidget {
-  StorageCell({Key key, this.document}) : super(key: key);
-  final DocumentSnapshot document;
+  StorageCell({Key key, this.storageUnitName}) : super(key: key);
+  final String storageUnitName;
   @override
   _StorageCellState createState() => _StorageCellState();
 }
@@ -32,7 +32,7 @@ class _StorageCellState extends State<StorageCell> {
                       ),
                       Padding(
                         padding: AppTheme.pageTitleMargin,
-                        child: Text(widget.document["name"],
+                        child: Text(widget.storageUnitName,
                             style: AppTheme.pageTitle),
                       ),
                       Expanded(
@@ -55,11 +55,11 @@ class _StorageCellState extends State<StorageCell> {
                                       scrollDirection: Axis.horizontal,
                                       children: [
                                         StatBox(
-                                            title: "Storage Units",
+                                            title: "Products",
                                             text: "4 registered"),
                                         StatBox(
-                                            title: "Storage Units",
-                                            text: "4 registered")
+                                            title: "Expired Products",
+                                            text: "0 registered")
                                       ],
                                     ),
                                   )
@@ -97,20 +97,21 @@ class _StorageCellState extends State<StorageCell> {
                                             ),
                                             DataColumn(
                                               label: Text(
-                                                'View Ingridients',
+                                                'View',
                                                 style: AppTheme.tableTitle,
                                               ),
                                             ),
                                           ],
                                           rows: <DataRow>[
                                             for (var item
-                                                in widget.document["items"])
+                                                in ScannedProduct.items)
                                               DataRow(
                                                 cells: <DataCell>[
-                                                  DataCell(Text(item["name"],
+                                                  DataCell(Text(item.title,
                                                       style:
                                                           AppTheme.tableText)),
-                                                  DataCell(Text(item["expiry"],
+                                                  DataCell(Text(
+                                                      item.expiry.toString(),
                                                       style:
                                                           AppTheme.tableText)),
                                                   DataCell(
@@ -122,10 +123,10 @@ class _StorageCellState extends State<StorageCell> {
                                                                   MaterialPageRoute(
                                                                     builder: (BuildContext context) => ProductView(
                                                                         productName:
-                                                                            item[
-                                                                                "name"],
+                                                                            item
+                                                                                .title,
                                                                         lastPage:
-                                                                            widget.document["item"]),
+                                                                            widget.storageUnitName),
                                                                   ),
                                                                 ),
                                                         child: Icon(Icons

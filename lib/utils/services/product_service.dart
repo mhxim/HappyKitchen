@@ -14,10 +14,9 @@ class Barcode {
         "key": "j9msa6kvyece596rkobwizrqs3swsb"
       }),
     );
+    log(response.body.toString());
     if (response.statusCode == 200)
       return ScannedProduct.fromJson(jsonDecode(response.body));
-    else
-      throw Exception('Failed to load barcode');
   }
 }
 
@@ -26,9 +25,7 @@ class ScannedProduct {
 
   ScannedProduct({this.productName});
   factory ScannedProduct.fromJson(Map<String, dynamic> json) {
-    return ScannedProduct(
-      productName: json['product_name'],
-    );
+    return ScannedProduct(productName: json["products"][0]["product_name"]);
   }
 
   static Future<ProductIngredients> getProductIngredients(
@@ -42,26 +39,26 @@ class ScannedProduct {
           "x-app-id": "02874004",
           "x-app-key": "263be2bb56593e508cbad2250052fc37"
         });
+    log(productName);
+    log(response.body.toString());
     if (response.statusCode == 200)
       return ProductIngredients.fromJson(jsonDecode(response.body));
-    else
-      throw Exception('Failed to load barcode');
   }
 }
 
 class ProductIngredients {
-  final String foodName;
-  final Double calories;
-  final Double totalFat;
-  final Double saturatedFat;
-  final Double cholesterol;
-  final Double sodium;
-  final Double totalCarbohydrate;
-  final Double dietaryFiber;
-  final Double sugars;
-  final Double protein;
-  final Double potassium;
-  final String photoUrl;
+  var foodName;
+  var calories;
+  var totalFat;
+  var saturatedFat;
+  var cholesterol;
+  var sodium;
+  var totalCarbohydrate;
+  var dietaryFiber;
+  var sugars;
+  var protein;
+  var potassium;
+  var photoUrl;
   ProductIngredients(
       {this.foodName,
       this.calories,
@@ -77,18 +74,18 @@ class ProductIngredients {
       this.photoUrl});
   factory ProductIngredients.fromJson(Map<String, dynamic> json) {
     return ProductIngredients(
-      foodName: json['food_name'],
-      calories: json['nf_calories'],
-      totalFat: json['nf_total_fat'],
-      saturatedFat: json['nf_saturated_fat'],
-      cholesterol: json['nf_cholesterol'],
-      sodium: json['nf_sodium'],
-      totalCarbohydrate: json['nf_total_carbohydrate'],
-      dietaryFiber: json['nf_dietary_fiber'],
-      sugars: json['nf_sugars'],
-      protein: json['nf_protein'],
-      potassium: json['nf_potassium'],
-      photoUrl: json['photo.thumb'],
+      foodName: json['foods'][0]["food_name"],
+      calories: json['foods'][0]['nf_calories'],
+      totalFat: json['foods'][0]['nf_total_fat'],
+      saturatedFat: json['foods'][0]['nf_saturated_fat'],
+      cholesterol: json['foods'][0]['nf_cholesterol'],
+      sodium: json['foods'][0]['nf_sodium'],
+      totalCarbohydrate: json['foods'][0]['nf_total_carbohydrate'],
+      dietaryFiber: json['foods'][0]['nf_dietary_fiber'],
+      sugars: json['foods'][0]['nf_sugars'],
+      protein: json['foods'][0]['nf_protein'],
+      potassium: json['foods'][0]['nf_potassium'],
+      photoUrl: json['foods'][0]['photo']['thumb'],
     );
   }
 }

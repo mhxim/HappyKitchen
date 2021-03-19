@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -13,6 +15,7 @@ class ScanButton extends StatefulWidget {
 class _ScanButtonState extends State<ScanButton> {
   String _scanBarcode = 'Unknown';
   String _productName;
+  ScannedProduct scannedProduct;
 
   Future<void> scanBarcodeNormal() async {
     String barcodeScanRes;
@@ -36,15 +39,17 @@ class _ScanButtonState extends State<ScanButton> {
       width: 65.0,
       child: GestureDetector(
         onTap: () => scanBarcodeNormal().then((value) => {
-              Barcode.getBarcodeInfo(_scanBarcode)
-                  .then((value) => {_productName = value.productName}),
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      ProductView(productName: _productName, lastPage: "BACK"),
-                ),
-              ),
+              Barcode.getBarcodeInfo(_scanBarcode).then((value) => {
+                    _productName = value.productName,
+                    log(value.toString()),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ProductView(
+                            productName: _productName, lastPage: "BACK"),
+                      ),
+                    ),
+                  }),
             }),
         child: Container(
           decoration:

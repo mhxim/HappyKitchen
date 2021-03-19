@@ -4,9 +4,8 @@ import 'package:happy_kitchen/pages/subpages/storage_cell.dart';
 import 'package:happy_kitchen/themes/lighttheme.dart';
 
 class StorageBox extends StatefulWidget {
-  StorageBox({Key key, this.title, this.document}) : super(key: key);
+  StorageBox({Key key, this.title}) : super(key: key);
   final String title;
-  final DocumentSnapshot document;
 
   @override
   _StorageBoxState createState() => _StorageBoxState();
@@ -20,7 +19,7 @@ class _StorageBoxState extends State<StorageBox> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) =>
-              StorageCell(document: widget.document),
+              StorageCell(storageUnitName: widget.title),
         ),
       ),
       child: Column(

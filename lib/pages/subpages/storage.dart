@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:happy_kitchen/utils/model/product.dart';
 import 'package:happy_kitchen/utils/services/storage_service.dart';
 import 'package:happy_kitchen/widgets/storage_box.dart';
 import 'package:happy_kitchen/widgets/stat_box.dart';
@@ -11,13 +15,21 @@ class StoragePage extends StatefulWidget {
 }
 
 class _StoragePageState extends State<StoragePage> {
-  DocumentSnapshot storageUnits;
+  // DocumentSnapshot storageUnitName;
+  // final firestoreInstance = FirebaseFirestore.instance;
+  // var firebaseUser = FirebaseAuth.instance.currentUser;
 
-  @override
-  void initState() {
-    super.initState();
-    Storage.getStorageUnits().then((value) => storageUnits = value);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   // Product test = new Product(
+  //   //     name: "testproduct2",
+  //   //     expiry: Timestamp.fromDate(DateTime.parse("2021-12-12")));
+  //   // Storage.addStorageUnits("test3");
+  //   // Storage.addItem("test3", test);
+  //   log(Storage.getStorageUnits());
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +76,7 @@ class _StoragePageState extends State<StoragePage> {
                                         children: [
                                           StatBox(
                                               title: "Storage Units",
-                                              text: "4 registered"),
+                                              text: "1 registered"),
                                         ],
                                       ),
                                     )
@@ -88,31 +100,33 @@ class _StoragePageState extends State<StoragePage> {
                                       MediaQuery.of(context).size.width - 80.0,
                                   child: Padding(
                                       padding: EdgeInsets.all(10.0),
-                                      child: StreamBuilder<QuerySnapshot>(
-                                          stream: FirebaseFirestore.instance
-                                              .collection('books')
-                                              .snapshots(),
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot<QuerySnapshot>
-                                                  snapshot) {
-                                            if (snapshot.hasError)
-                                              return new Text(
-                                                  'Error: ${snapshot.error}');
-                                            switch (snapshot.connectionState) {
-                                              case ConnectionState.waiting:
-                                                return new Text('Loading...');
-                                              default:
-                                                return new Wrap(
-                                                  children: snapshot.data.docs
-                                                      .map((DocumentSnapshot
-                                                          document) {
-                                                    return new StorageBox(
-                                                        title: document["name"],
-                                                        document: document);
-                                                  }).toList(),
-                                                );
-                                            }
-                                          })),
+                                      child: Wrap(children: [
+                                        StorageBox(title: "beispiel")
+                                      ])
+                                      // StreamBuilder(
+                                      //     stream: FirebaseFirestore.instance
+                                      //         .collection('users')
+                                      //         .doc(firebaseUser.uid)
+                                      //         .snapshots(),
+                                      //     builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                                      //       if (snapshot.hasError)
+                                      //         return new Text(
+                                      //             'Error: ${snapshot.error}');
+                                      //       var storageDocument = snapshot.data;
+                                      //       switch (snapshot.connectionState) {
+                                      //         case ConnectionState.waiting:
+                                      //           return new Text('Loading...');
+                                      //         default:
+                                      //           return new Wrap(
+                                      //             children: for (storageDocument in storageDocument["storageUnits"]) {
+                                      //               return new StorageBox(
+                                      //                   title: document["name"],
+                                      //                   document: document);
+                                      //             },
+                                      //           );
+                                      //       }
+                                      //     })
+                                      ),
                                 ),
                               ],
                             ),

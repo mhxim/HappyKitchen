@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:happy_kitchen/utils/model/product.dart';
@@ -22,18 +24,21 @@ class Storage {
       "storageUnits": [
         {
           "name": storageUnitName,
-          "items": FieldValue.arrayUnion([
+          "items": [
             {"name": item.name, "expiry": item.expiry}
-          ])
+          ]
+          // "items": FieldValue.arrayUnion([
+          //   {"name": item.name, "expiry": item.expiry}
+          // ])
         }
       ],
     }, SetOptions(merge: true)).then((_) {
-      print("success!");
+      print("success! reee");
     });
   }
 
-  static Future<DocumentSnapshot> getStorageUnits() {
-    var value;
+  static String getStorageUnits() {
+    String response;
     final firestoreInstance = FirebaseFirestore.instance;
     var firebaseUser = FirebaseAuth.instance.currentUser;
     firestoreInstance
@@ -41,8 +46,9 @@ class Storage {
         .doc(firebaseUser.uid)
         .get()
         .then((value) {
-      value = value.data()["storageUnits"];
+      response = value.data()["storageUnits"].toString();
+      log(value.data()["storageUnits"].toString());
     });
-    return value;
+    return response;
   }
 }
